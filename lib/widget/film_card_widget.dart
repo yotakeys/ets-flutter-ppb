@@ -50,6 +50,9 @@ class FilmCardWidget extends StatelessWidget {
                 fontWeight: FontWeight.bold,
               ),
             ),
+            Image.network(
+              film.gambar,
+            ),
           ],
         ),
       ),

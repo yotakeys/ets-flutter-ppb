@@ -65,7 +65,12 @@ class _FilmDetailPageState extends State<FilmDetailPage> {
                       film.description,
                       style:
                           const TextStyle(color: Colors.white70, fontSize: 18),
-                    )
+                    ),
+                    const SizedBox(height: 8),
+                    if (film.gambar.isNotEmpty)
+                      Image.network(
+                        film.gambar,
+                      ),
                   ],
                 ),
               ),

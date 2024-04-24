@@ -3,15 +3,19 @@ import 'package:flutter/material.dart';
 class FilmFormWidget extends StatelessWidget {
   final String? title;
   final String? description;
+  final String? gambar;
   final ValueChanged<String> onChangedTitle;
   final ValueChanged<String> onChangedDescription;
+  final ValueChanged<String> onChangedGambar;
 
   const FilmFormWidget({
     Key? key,
     this.title = '',
     this.description = '',
+    this.gambar = '',
     required this.onChangedTitle,
     required this.onChangedDescription,
+    required this.onChangedGambar,
   }) : super(key: key);
 
   @override
@@ -25,6 +29,7 @@ class FilmFormWidget extends StatelessWidget {
               const SizedBox(height: 8),
               buildDescription(),
               const SizedBox(height: 16),
+              buildGambar(),
             ],
           ),
         ),
@@ -61,5 +66,22 @@ class FilmFormWidget extends StatelessWidget {
             ? 'The description cannot be empty'
             : null,
         onChanged: onChangedDescription,
+      );
+
+  Widget buildGambar() => TextFormField(
+        maxLines: 1,
+        initialValue: gambar,
+        style: const TextStyle(
+          color: Colors.white70,
+        ),
+        decoration: const InputDecoration(
+          border: InputBorder.none,
+          hintText: 'Gambar',
+          hintStyle: TextStyle(color: Colors.white70),
+        ),
+        validator: (gambar) => gambar != null && gambar.isEmpty
+            ? 'The gambar cannot be empty'
+            : null,
+        onChanged: onChangedGambar,
       );
 }

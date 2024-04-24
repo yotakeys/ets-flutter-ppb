@@ -17,10 +17,9 @@ class AddEditFilmPage extends StatefulWidget {
 
 class _AddEditFilmPageState extends State<AddEditFilmPage> {
   final _formKey = GlobalKey<FormState>();
-  late bool isImportant;
-  late int number;
   late String title;
   late String description;
+  late String gambar;
 
   @override
   void initState() {
@@ -28,6 +27,7 @@ class _AddEditFilmPageState extends State<AddEditFilmPage> {
 
     title = widget.film?.title ?? '';
     description = widget.film?.description ?? '';
+    gambar = widget.film?.gambar ?? '';
   }
 
   @override
@@ -40,15 +40,18 @@ class _AddEditFilmPageState extends State<AddEditFilmPage> {
           child: FilmFormWidget(
             title: title,
             description: description,
+            gambar: gambar,
             onChangedTitle: (title) => setState(() => this.title = title),
             onChangedDescription: (description) =>
                 setState(() => this.description = description),
+            onChangedGambar: (gambar) => setState(() => this.gambar = gambar),
           ),
         ),
       );
 
   Widget buildButton() {
-    final isFormValid = title.isNotEmpty && description.isNotEmpty;
+    final isFormValid =
+        title.isNotEmpty && description.isNotEmpty && gambar.isNotEmpty;
 
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 8, horizontal: 12),
@@ -83,6 +86,7 @@ class _AddEditFilmPageState extends State<AddEditFilmPage> {
     final film = widget.film!.copy(
       title: title,
       description: description,
+      gambar: gambar,
     );
 
     await FilmDatabase.instance.update(film);
@@ -92,7 +96,7 @@ class _AddEditFilmPageState extends State<AddEditFilmPage> {
     final film = Film(
       title: title,
       description: description,
-      gambar: "testing",
+      gambar: gambar,
       createdTime: DateTime.now(),
     );
 
