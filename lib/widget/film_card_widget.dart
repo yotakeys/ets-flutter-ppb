@@ -3,12 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:ets_flutter_ppb/model/film.dart';
 
 final _lightColors = [
-  Colors.amber.shade300,
-  Colors.lightGreen.shade300,
-  Colors.lightBlue.shade300,
-  Colors.orange.shade300,
-  Colors.pinkAccent.shade100,
-  Colors.tealAccent.shade100
+  Colors.black,
 ];
 
 class FilmCardWidget extends StatelessWidget {
@@ -26,12 +21,11 @@ class FilmCardWidget extends StatelessWidget {
     /// Pick colors from the accent colors based on index
     final color = _lightColors[index % _lightColors.length];
     final time = DateFormat.yMMMd().format(film.createdTime);
-    final minHeight = getMinHeight(index);
 
     return Card(
       color: color,
       child: Container(
-        constraints: BoxConstraints(minHeight: minHeight),
+        constraints: const BoxConstraints(minHeight: 250, maxHeight: 300),
         padding: const EdgeInsets.all(8),
         child: Column(
           mainAxisSize: MainAxisSize.min,
@@ -39,39 +33,27 @@ class FilmCardWidget extends StatelessWidget {
           children: [
             Text(
               time,
-              style: TextStyle(color: Colors.grey.shade700),
+              style: const TextStyle(color: Colors.white),
             ),
             const SizedBox(height: 4),
             Text(
               film.title,
               style: const TextStyle(
-                color: Colors.black,
+                color: Colors.white,
                 fontSize: 20,
                 fontWeight: FontWeight.bold,
               ),
             ),
             Image.network(
               film.gambar,
+              width: 200,
+              height: 200,
+              errorBuilder: (context, error, stackTrace) =>
+                  const Icon(Icons.error_outline, color: Colors.red),
             ),
           ],
         ),
       ),
     );
-  }
-
-  /// To return different height for different widgets
-  double getMinHeight(int index) {
-    switch (index % 4) {
-      case 0:
-        return 100;
-      case 1:
-        return 150;
-      case 2:
-        return 150;
-      case 3:
-        return 100;
-      default:
-        return 100;
-    }
   }
 }

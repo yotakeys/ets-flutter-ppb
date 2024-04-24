@@ -70,6 +70,10 @@ class _FilmDetailPageState extends State<FilmDetailPage> {
                     if (film.gambar.isNotEmpty)
                       Image.network(
                         film.gambar,
+                        width: 200,
+                        height: 200,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(Icons.error_outline, color: Colors.red),
                       ),
                   ],
                 ),
